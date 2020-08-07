@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const verify = require('../../controller/verify');
+const verify = require('../../../controller/token')
 
 //토큰 검증 - access token 
-router.get('/', async (req, res) => {
+router.get('/', function (req, res)  {
     let access_token = req.headers['authorization'];
-    let result = await verify.token_verify(access_token)
-    .catch((err) => {
+    let result = verify.token_verify(access_token)
+    /*.catch((err) => {
         res.status(500).send(err);
-    });
+    });*/
     res.send(result);
 });
 
@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     let access_token = req.headers['authorization'];
     try{
-        let result = await verify.token_verify(access_token);
+        let result = verify.token_verify(access_token);
         // access token 유효한 경우 
         if(result.state === 'success') res.status(200).send(result);
         // access token 만료된 경우 

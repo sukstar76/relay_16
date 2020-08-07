@@ -17,6 +17,7 @@ module.exports = {
     let decoded;
     try {
       decoded = jwt.verify(token, 'secret_key', options);
+      console.log(decoded);
     }
     catch(err) {
       return err.message;
