@@ -60,7 +60,7 @@
 		}).then(response => response.json())
 			.then(response => {
 				userName.innerHTML = `
-					${response.message.user_name}님 안녕하세요!
+					${response.nickname}님 안녕하세요!
 				`;
 			});
 		

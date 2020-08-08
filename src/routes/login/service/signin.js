@@ -13,7 +13,7 @@ router.post('/', async (req, res, next) => {
         db.user.findOne({id: user_id})
         .then( user =>{
             const accessToken = createToken(user.id);
-            res.cookie('user_id', accessToken);
+            res.cookie('user', accessToken);
             res.status(201).json(accessToken);
         })
         .catch(err => {

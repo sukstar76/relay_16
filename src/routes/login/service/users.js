@@ -7,7 +7,7 @@ router.get('/', async (req, res,next) => {
     try{
         db.user.findOne({id: res.locals.user_id})
         .then( user =>{
-           res.status(200).send(user.nickname);
+           res.status(200).json({nickname : user.nickname});
         })
         .catch(err => {
             res.status(400).send(err);

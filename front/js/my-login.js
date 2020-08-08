@@ -93,7 +93,6 @@ $(function () {
 		}).then(response => response.json())
 			.then(response => {
 				if(response.data !== null) {
-					console.log(response.data);
 					// 로그인 성공
 					//localStorage.setItem('token', response);
 					location.href="main.html";
