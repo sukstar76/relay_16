@@ -7,9 +7,10 @@ const createToken = (id) =>{
 const verifyToken =  (req, res,next) =>  {
     try{
         const accessToken = req.cookies.user;
+        //const accessToken = req.headers.authorization;
         const decoded = jwt.verify(accessToken,'secret_key');
         if(decoded){
-            res.locals.user_id = decoded.user_id;
+            res.user_id = decoded.user_id;
             next();
         }else{
             res.status(401).json("만료");

@@ -9,20 +9,19 @@ router.post('/', async (req, res, next) => {
     try {
         let { user_id, user_pwd } = req.body;
         if (!user_id || !user_pwd) throw Error();
-
-        db.user.findOne({id: user_id})
+        db.user.findOne({where: {id: user_id}})
         .then( user =>{
+            if(user.password !== user_pwd) throw Error();
             const accessToken = createToken(user.id);
             res.cookie('user', accessToken);
             res.status(201).json(accessToken);
         })
-        .catch(err => {
-            res.status(400).send(err);
+        .catch( err => {
+            res.status(400).json(null);
         })
 
     } catch (err) {
-        console.log(err);
-        next(err);
+        res.status(400).json(null);
     }
 });
 
